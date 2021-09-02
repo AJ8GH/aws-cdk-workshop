@@ -1,4 +1,4 @@
-export default async function handler(event) {
+exports.handler = async function(event) {
   console.log("request:", JSON.stringify(event, undefined, 2));
 
   return {
