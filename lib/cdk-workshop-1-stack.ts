@@ -1,4 +1,5 @@
 import * as lambda from '@aws-cdk/aws-lambda'
+import * as apigw from '@aws-cdk/aws-apigateway'
 import * as cdk from '@aws-cdk/core';
 
 export class CdkWorkshop1Stack extends cdk.Stack {
@@ -10,5 +11,9 @@ export class CdkWorkshop1Stack extends cdk.Stack {
       code: lambda.Code.fromAsset('lambda'),
       handler: 'hello.handler'
     });
+
+    new apigw.LambdaRestApi(this, "EndPoint", {
+      handler: hello
+    })
   }
 }
