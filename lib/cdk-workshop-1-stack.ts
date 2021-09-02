@@ -7,12 +7,5 @@ export class CdkWorkshop1Stack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const queue = new sqs.Queue(this, 'CdkWorkshop1Queue', {
-      visibilityTimeout: cdk.Duration.seconds(300)
-    });
-
-    const topic = new sns.Topic(this, 'CdkWorkshop1Topic');
-
-    topic.addSubscription(new subs.SqsSubscription(queue));
   }
 }
