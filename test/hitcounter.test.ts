@@ -4,7 +4,7 @@ import * as lambda from '@aws-cdk/aws-lambda';
 
 import { HitCounter }  from '../lib/hitcounter';
 
-test('DynamoDB Table Created', () => {
+test('DynamoDB table created with encryption', () => {
   const stack = new cdk.Stack();
 
   new HitCounter(stack, 'MyTestConstruct', {
@@ -14,7 +14,11 @@ test('DynamoDB Table Created', () => {
       code: lambda.Code.fromInline('test')
     })
   });
-  expectCDK(stack).to(haveResource("AWS::DynamoDB::Table"));
+  expectCDK(stack).to(haveResource("AWS::DynamoDB::Table", {
+    SSESpecification: {
+      SSEEnabled: true
+    }
+  }));
 });
 
 test('Lambda has environment variables', () => {
